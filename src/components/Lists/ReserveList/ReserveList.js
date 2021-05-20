@@ -36,31 +36,12 @@ class ReserveList extends Component {
     }
   }
 
-  displayReserveUser() {
-    if (this.props.reserveList) {
-      return this.props.reserveList.map((reserve) => {
-        return (
-          reserve.assigned_client && reserve.assigned_client.id === this.props.user.id &&
-          <div className="reserve-list">
-            <ReserveItem
-              key={reserve.id}
-              {...reserve}
-              deleteReserve={this.deleteReserve}
-            />
-          </div>
-        );
-      });
-    } else {
-      return null;
-    }
-  }
-
   render() {
     return (
       <div>
         <AdminNavbar />
         <div>
-          {this.displayReserveUser()}
+          {this.displayReserve()}
         </div>
       </div>
     );

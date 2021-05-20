@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import "./EditReserve.css";
+import DatePicker from "react-datepicker";
+import { addMonths } from 'date-fns';
 import { withAuth } from "../../context/auth.context";
 import { withReserve } from "../../context/reserve.context";
-import { withRouter } from "react-router"
+import { withRouter } from "react-router";
 import AdminNavbar from "../General/Navbar/AdminNavbar";
 import reserveService from "../../services/reserve.service";
 const EMAIL_PATTERN =
@@ -26,10 +28,11 @@ class EditReserve extends Component {
       fields: {
         reservation_date: "",
         assigned_worker: "",
+        start_date: null,
       },
       errors: {
         reservation_date: null,
-        assigned_worker: null
+        assigned_worker: null,
       },
     };
     this.reserveService = new reserveService();
@@ -65,6 +68,21 @@ class EditReserve extends Component {
     });
   }
 
+  onChange = (date) => {
+    console.log("date", date);
+    this.setState({
+      ...this.state,
+      fields: {
+        ...this.state.fields,
+        reservation_date: date,
+      },
+    });
+  };
+  isWeekday = (date) => {
+    const day = date.getDay();
+    return day !== 0;
+  };
+
   render() {
     const { fields } = this.state;
     return (
@@ -74,13 +92,24 @@ class EditReserve extends Component {
           <form onSubmit={(e) => this.handleSubmit(e)}>
             <div className="form-group">
               <label htmlFor="reservation_date">Fecha:</label>
+              <div>
+                <DatePicker
+                  placeholderText="Elige día y hora"
+                  showTimeInput
+                  timeInputLabel="Hora:"
+                  dateFormat="dd/MM/yyyy h:mm aa"
+                  selected={fields.startDate}
+                  onChange={this.onChange}
+                  maxDate={addMonths(fields.startDate, 5)}
+                  filterDate={this.isWeekday}
+                />
+              </div>
               <input
-                className="form-control"
-                type="date"
-                name="reservation_date"
-                value={fields.reservation_date}
-                onChange={(e) => this.handleChange(e)}
-              />
+            className="hidden"
+            type="text"
+            name="name"
+            value={fields.startDate ? fields.startDate : ""}
+            />
             </div>
             <button className="btn btn-block btn-primary" type="submit">
               Actualizar
