@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import './EditClient.css';
 import { withRouter } from "react-router";
 import { withAuth } from "../../context/auth.context";
 import { withUser } from "../../context/user.context";
@@ -66,7 +67,6 @@ class EditClient extends Component {
   }
 
   async componentDidMount() {
-    console.log("PROPS", this.props)
     const result = await this.userService.showUserDetail(
       this.props.match.params.id
     );

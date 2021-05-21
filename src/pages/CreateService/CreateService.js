@@ -146,13 +146,14 @@ class CreateService extends Component {
             <div>
               <label htmlFor="price">Worker ID:</label>
               <input
+                className="form-control"
                 type="string"
                 name="worker_id"
                 value={fields.worker_id}
                 onChange={(e) => this.handleChange(e)}
               />
             </div>
-            <button type="submit">Crear Servicio</button>
+            <button className="btn btn-block btn-primary" type="submit">Crear Servicio</button>
           </form>
         </div>
       </div>

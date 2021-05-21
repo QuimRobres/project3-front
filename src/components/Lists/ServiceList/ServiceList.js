@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import './Service-list.css';
 import { withAuth } from "../../../context/auth.context";
 import { withService } from "../../../context/service.context";
 import ServiceItem from "../ServiceItem/ServiceItem";
@@ -38,9 +39,9 @@ class ServiceList extends Component {
 
   render() {
     return (
-      <div>
+      <div >
       {this.role === "Admin" ? <AdminNavbar/> : null}
-        <div className="App">{this.displayServices()}</div>
+        <div className="service-list">{this.displayServices()}</div>
       </div>
     );
   }
