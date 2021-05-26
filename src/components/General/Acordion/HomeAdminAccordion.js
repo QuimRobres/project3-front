@@ -2,6 +2,7 @@ import React from 'react';
 import './HomeAdminAccordion.css';
 import { Link } from 'react-router-dom';
 
+
 export default function Acordion() {
     return (
         <div className="activities-cards">
